@@ -1,8 +1,13 @@
 import React from "react";
-import styles from "./Header.module.css";
+import "../AppWideCSS.css";
+import AddTodo from "./AddTodo";
 
 const Header = (props) => {
-  return <div>Header Sanity Check</div>;
+  return (
+    <div className="header">
+      <AddTodo />
+    </div>
+  );
 };
 
 export default Header;
