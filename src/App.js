@@ -74,7 +74,10 @@ const App = (props) => {
       }}
     >
       <div className="app">
-        <h1>Todo Application</h1>
+        <h1>
+          Todo Application <br />
+          (Built using Context API)
+        </h1>
         <p>Features Supported : </p>
         <p>
           Input Validation, Addition, Deletion, Marking as Completed & Editing
