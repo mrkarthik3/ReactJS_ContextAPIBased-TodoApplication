@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./AppWideCSS.css";
-import TodoPage from "./TodoPage";
-import TodoContext from "./store/todo-context";
+import { TodoPage } from "./components";
+import { todoContext } from "./store";
 
-const App = (props) => {
+const App = () => {
   const dummyData = [
     {
       title: "Complete Pesto Assignments",
@@ -25,35 +25,33 @@ const App = (props) => {
   const [todoToEdit, setTodoToEdit] = useState(null);
 
   const onAdd = (newTodo) => {
+    // adding new todo
     const newData = [...data, newTodo];
     setData(newData);
   };
 
   const onDelete = (idOfTodoToBeDeleted) => {
+    // deleting a todo based on ID
     const newData = data.filter((todo) => todo.id !== idOfTodoToBeDeleted);
     setData(newData);
   };
 
   const onEdit = (idOfTodoToEdit, newTitle) => {
+    // changing title property of a given ID
     const newData = data.map((todo) => {
       if (todo.id === idOfTodoToEdit) {
-        console.log("changing title property of a given ID");
         todo.title = newTitle;
       }
       return todo;
     });
     setData(newData);
-    console.log("before", todoToEdit);
     setTodoToEdit(null);
-    console.log("after", todoToEdit);
-    console.log("Editing method is running");
   };
 
   const onDone = (todoIdToBeSetAsDone) => {
     // change isDone property to "true" for that ID
     const newData = data.map((todo) => {
       if (todo.id === todoIdToBeSetAsDone) {
-        console.log("changing isDone property of a given ID");
         todo.isDone = !todo.isDone;
       }
       return todo;
@@ -62,10 +60,10 @@ const App = (props) => {
   };
 
   return (
-    <TodoContext.Provider
+    <todoContext.Provider
       value={{
-        todosList: data,
-        todoToEdit,
+        todoList: data,
+        todoBeingEdited: todoToEdit,
         setTodoToEdit,
         onAdd,
         onDelete,
@@ -84,7 +82,7 @@ const App = (props) => {
         </p>
         <TodoPage />
       </div>
-    </TodoContext.Provider>
+    </todoContext.Provider>
   );
 };
 
